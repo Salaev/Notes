@@ -15,7 +15,9 @@ public class Note {
 
     @Column(name = "title", nullable = false, length = 50)
     private String title;
+
    @Column(name = "note_data", nullable = false)
+   @Temporal(TemporalType.TIMESTAMP)
     private Date noteData;
 
     public long getId() {

@@ -5,14 +5,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mtsit.notes.server.entity.Note;
+import ru.mtsit.notes.server.repository.NoteRepository;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/notes")
 public class NotesController {
+    private NoteRepository noteRepository;
+
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Note getNote() {
+        List<Note> list = noteRepository.findAll();
         return createMockNote();
     }
 
