@@ -4,13 +4,24 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import ru.mtsit.notes.server.entity.Note;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping("/notes")
 public class NotesController {
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public String getSurvey(ModelMap model) {
-        return "Get";
+    public Note getNote() {
+        return createMockNote();
+    }
+
+    private Note createMockNote() {
+        Note note = new Note();
+        note.setId(1);
+        note.setTitle("первое примечание");
+        note.setNoteData(new Date());
+        return note;
     }
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
