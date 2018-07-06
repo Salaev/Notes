@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/notes")
 public class NotesController {
-    private NoteRepository noteRepository;
+    public NoteRepository noteRepository;
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Note getNote() {
