@@ -1,5 +1,6 @@
 package ru.mtsit.notes.server.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,13 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/notes")
 public class NotesController {
+    @Autowired
     private NoteRepository noteRepository;
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Note getNote() {
-
-        List<Note> list = noteRepository.findAll();
-
+           List<Note> notes= noteRepository.findAll();
         return createMockNote();
     }
 
