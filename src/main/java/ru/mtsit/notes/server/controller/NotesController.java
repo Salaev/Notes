@@ -13,17 +13,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/notes")
 public class NotesController {
-    public NoteRepository noteRepository;
+    private NoteRepository noteRepository;
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Note getNote() {
+
         List<Note> list = noteRepository.findAll();
+
         return createMockNote();
     }
 
     private Note createMockNote() {
         Note note = new Note();
-        note.setId(1);
+        note.setId(3);
         note.setTitle("первое примечание");
         note.setNoteData(new Date());
         return note;
