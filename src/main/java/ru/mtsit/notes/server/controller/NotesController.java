@@ -34,5 +34,4 @@ public class NotesController {
     public void deleteNote(@PathVariable("id") long noteID) {
         service.NoteDelete(noteID);
     }
-    
 }

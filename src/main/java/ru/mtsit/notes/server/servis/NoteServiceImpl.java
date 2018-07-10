@@ -1,11 +1,13 @@
 package ru.mtsit.notes.server.servis;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.mtsit.notes.server.entity.Note;
 import ru.mtsit.notes.server.repository.NoteRepository;
 
 import java.util.List;
 
+@Service
 public class NoteServiceImpl implements NoteService {
     @Autowired
     NoteRepository noteRepository;
