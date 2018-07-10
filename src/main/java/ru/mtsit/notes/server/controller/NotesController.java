@@ -2,48 +2,37 @@ package ru.mtsit.notes.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.mtsit.notes.server.entity.Note;
 import ru.mtsit.notes.server.repository.NoteRepository;
+import ru.mtsit.notes.server.servis.NoteServiceImpl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/notes")
 public class NotesController {
     @Autowired
-    private NoteRepository noteRepository;
+    private NoteServiceImpl service;
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public Note getNote() {
-           List<Note> notes= noteRepository.findAll();
-        return createMockNote();
+    @RequestMapping(value = "/notes", method = RequestMethod.GET)
+    public  List<Note> getAllNotes() {
+             return service.getAll();
+    }
+    @RequestMapping(value = "/notes/{id}", method = RequestMethod.GET)
+    public Note getNote(@PathVariable("id") long noteID) {
+        return service.getNote(noteID);
     }
 
-    private Note createMockNote() {
-        Note note = new Note();
-        note.setId(3);
-        note.setTitle("первое примечание");
-        note.setNoteData(new Date());
-        return note;
+    @RequestMapping(value = "/notes", method = RequestMethod.POST)
+    public Note saveNote(@RequestBody Note note) {
+        return service.save(note);
     }
 
-    @RequestMapping(value = "/post", method = RequestMethod.POST)
-    public String postSurvey(ModelMap model) {
-        return "Post";
+    @RequestMapping(value = "/notes/{id}", method = RequestMethod.DELETE)
+    public void deleteNote(@PathVariable("id") long noteID) {
+        service.NoteDelete(noteID);
     }
-
-    @RequestMapping(value = "/put", method = RequestMethod.PUT)
-    public String putSurvey(ModelMap model) {
-        return "Put";
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public String deleteSurvey(ModelMap model) {
-        return "Delete";
-    }
-
+    
 }
